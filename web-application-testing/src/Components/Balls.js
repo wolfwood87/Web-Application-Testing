@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 
-const Balls = () => {
-    const [balls, setBalls] = useState(0)
+const Balls = (props) => {
+    
 
 return (
-    <div>Balls: {balls}</div>
+    <div data-test='ball-Com'>Balls: {props.balls}</div>
 )
 }
 export default Balls;

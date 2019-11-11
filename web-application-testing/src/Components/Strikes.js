@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 
-const Strikes = () => {
-    const [strikes, setStrikes] = useState(0)
+const Strikes = (props) => {
 
 return (
-    <div>Strikes: {Strikes}</div>
+    <div data-test='strike-Com'>Strikes: {props.strikes}</div>
 )
 }
 export default Strikes;

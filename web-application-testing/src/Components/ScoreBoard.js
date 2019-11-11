@@ -1,20 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import Strikes from './Strikes.js';
 import Balls from './Balls.js';
 
-const ScoreBoard = () => {
-    const Board = styled.div`
-    height: 400px;
-    width: 80%;
-    border: 1px solid black;
-    margin-bottom: 5%;
-    `
+const ScoreBoard = (props) => {
+    
     return (
-        <Board>
-            <Strikes />
-            <Balls />
-        </Board>
+        <div data-test='score-Com'>
+            <div>
+                <p>Home Score</p>
+                <p>{props.homeScore}</p>
+            </div>
+            <div>
+                <Strikes strikes={props.strikes}/>
+                <Balls balls={props.balls}/>
+            </div>
+            <div>
+                <p>Away Score</p>
+                <p>{props.awayScore}</p>
+            </div>
+        </div>
     )
 }
 
