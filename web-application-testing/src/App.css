@@ -21,24 +21,61 @@
   color: #09d3ac;
 }
 
+.scoreboard {
+  border: 1px solid black;
+  width: 50%;
+  height: 200px;
+  margin: 1% auto;
+  background-color: #c19a6b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+}
+.score-con {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.score-nums {
+  display: flex;
+  word-wrap: wrap;
+  width: 50%;
+  height: 200px;
+  flex-direction: column;
+  align-items: space-evenly;
+  border: 1px solid black;
+  font-size: 20px;
+}
+.strike-ball {
+  display: flex;
+  justify-content: space-evenly;
+}
 .bases {
   font-size: 40px;
 }
 .base1 {
   position: absolute;
-  top: 20%;
-  left: 55.65%;
+  top: 19.25vh;
+  left: 54.9vw;
 }
 .base2 {
   position: absolute;
-  top: 9.25%;
-  left: 49.70%;
+  top: 9vh;
+  left: 49.70vw;
 }
 .base3 {
   position: absolute;
-  top: 20%;
-  left: 43.75%;
+  top: 19.1vh;
+  left: 44.55vw;
 }
 .hide {
   display: none;
+}
+
+.pitch-button {
+  border-radius: 50%;
+  background-color: blue;
+  color: white;
+  height: 75px;
+  width: 75px;
 }

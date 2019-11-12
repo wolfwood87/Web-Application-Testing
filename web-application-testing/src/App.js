@@ -6,6 +6,7 @@ import Bases from './Components/Bases.js';
 
 
 function App() {
+  //hooks list
   const [balls, setBalls] = useState(0);
   const [strikes, setStrikes] = useState(0);
   const [message, setMessage] = useState('Here comes the pitch!');
@@ -19,6 +20,8 @@ function App() {
   const [team, setTeam] = useState(true);
   const [teamName, setTeamName] = useState();
 
+
+  //effects to change teams after 3 outs
   useEffect(() => {
     (outs>=3) ? changeTeam() : setTeam(team)
   }, [outs])
@@ -27,6 +30,8 @@ function App() {
   }, [team])
 
 
+
+  //functions
   const changeTeam = () => {
     setTeam(!team)
     setOuts(0)
@@ -50,6 +55,7 @@ function App() {
       setStrikes(0);
       setBalls(0);
       setOnBase([...onBase, ', ', 1])
+      setBases({first: true})
       setMessage("Ball. Take your base.")
     }
   }
@@ -101,7 +107,8 @@ function App() {
     setMessage(`It was a ${base.name}!`)
   }
 
-  const pitch = () => {
+  const pitch = (e) => {
+    e.preventDefault();
     let random = Math.floor(Math.random() * Math.floor(10))
     if (random<3) {
       {increaseBalls()}
@@ -123,9 +130,8 @@ function App() {
       <p>{teamName} up to bat.</p>
       <Bases onBases={bases} />
       <ScoreBoard homeScore={homeScore} awayScore = {awayScore} outs = {outs} balls={balls} strikes={strikes}/>
-      <button onClick={pitch}>Pitch</button>
+      <button onClick={pitch} className="pitch-button">Pitch</button>
       <p>{message}</p>
-      <p>On Base: {onBase}</p>
     </div>
   );
 }
