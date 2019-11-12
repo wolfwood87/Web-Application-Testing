@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ScoreBoard from './Components/ScoreBoard.js';
@@ -13,7 +13,24 @@ function App() {
   const [homeScore, setHomeScore] = useState(0);
   const [awayScore, setAwayScore] = useState(0);
   const [onBase, setOnBase] = useState([]);
+  const [bases, setBases] = useState ({first: false}, {second: false}, {third: false}, {fourth: false})
   const [random, setRandom] = useState(Math.floor(Math.random() * Math.floor(10)));
+  const [outs, setOuts] = useState(0);
+  const [team, setTeam] = useState(true);
+  const [teamName, setTeamName] = useState();
+
+  useEffect(() => {
+    (outs>=3) ? changeTeam() : setTeam(team)
+  }, [outs])
+  useEffect(() => {
+    (team===true) ? setTeamName('Home Team') : setTeamName('Away Team')
+  }, [team])
+
+
+  const changeTeam = () => {
+    setTeam(!team)
+    setOuts(0)
+  }
   const foul = () => {
     if (strikes<=1) {
       setStrikes(strikes + 1);
@@ -23,6 +40,7 @@ function App() {
       setMessage('Foul Ball! Still two strikes.')
     }
   }
+
   const increaseBalls = () => {
     if (balls<=2) {
       setBalls(balls + 1);
@@ -35,6 +53,7 @@ function App() {
       setMessage("Ball. Take your base.")
     }
   }
+
   const increaseStrikes = () => {
     if(strikes<=1) {
       setStrikes(strikes + 1);
@@ -43,9 +62,11 @@ function App() {
     else {
       setStrikes(0);
       setBalls(0);
+      setOuts(outs + 1);
       setMessage("Third Strike. You're out!")
     }
   }
+
   const hit = () => {
     let random = Math.floor(Math.random() * Math.floor(10))
     setBalls(0);
@@ -65,8 +86,17 @@ function App() {
 
   const hitBases = () => {
     setOnBase([onBase + ", " + base.id])
-    if(base.id === 4) {
-      setHomeScore(homeScore + 1)
+    if(base.id===1) {
+      setBases({first: true})
+    }
+    else if(base.id===2) {
+      setBases({second: true})
+    }
+    else if(base.id===3) {
+      setBases({third: true})
+    }
+    else if(base.id === 4) {
+      (team===true) ? setHomeScore(homeScore + 1) : setAwayScore(awayScore + 1)
     }
     setMessage(`It was a ${base.name}!`)
   }
@@ -86,10 +116,13 @@ function App() {
       {hit()}
     }
   }
+
+
   return (
     <div className="App" data-test='app-Com'>
-      <Bases />
-      <ScoreBoard homeScore={homeScore} awayScore = {awayScore} balls={balls} strikes={strikes}/>
+      <p>{teamName} up to bat.</p>
+      <Bases onBases={bases} />
+      <ScoreBoard homeScore={homeScore} awayScore = {awayScore} outs = {outs} balls={balls} strikes={strikes}/>
       <button onClick={pitch}>Pitch</button>
       <p>{message}</p>
       <p>On Base: {onBase}</p>

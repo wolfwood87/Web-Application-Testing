@@ -14,6 +14,7 @@ const ScoreBoard = (props) => {
             <div>
                 <Strikes strikes={props.strikes}/>
                 <Balls balls={props.balls}/>
+                <p>Outs: {props.outs}</p>
             </div>
             <div>
                 <p>Away Score</p>

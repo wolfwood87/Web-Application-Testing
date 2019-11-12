@@ -20,3 +20,25 @@
 .App-link {
   color: #09d3ac;
 }
+
+.bases {
+  font-size: 40px;
+}
+.base1 {
+  position: absolute;
+  top: 20%;
+  left: 55.65%;
+}
+.base2 {
+  position: absolute;
+  top: 9.25%;
+  left: 49.70%;
+}
+.base3 {
+  position: absolute;
+  top: 20%;
+  left: 43.75%;
+}
+.hide {
+  display: none;
+}
